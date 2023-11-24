@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <title>Web Interface</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-8JhdZt8BRAPKoARuYi4l29pBykUnN6IMhTYUN8ti55COpnZo3ylqBE0Idf6kTYu4M2STaz2JMyaCkRGDw7JRg==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" type="text/css" href="style/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-8JhdZt8BRAPKoARuYi4l29pBykUnN6IMhTYUN8ti55COpnZo3ylqBE0Idf6kTYu4M2STaz2JMyaCkRGDw7JRg==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        
+        table th,
+        table td {
+            border: none;
+            padding: 8px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <header id="header">
+        <div id="logo">
+            <img src="img/Слой 1.png" alt="" srcset="" style="max-width: 55px; max-height: 45px;">
+        </div>
+        <div id="navigation">
+            <div id="profile-button">
+                <a href="#" class="button white-button">Faults ()</a>
+                <a href="#" class="button white-button">Actions ()</a>
+            </div>
+
+            <a href="#" class="profile-link">
+                <img id="profile-pic" src="img/icon.png" alt="Profile">
+            </a>
+        </div>
+        <div id="language-switcher">
+            <button onclick="switchLanguage()">Switch Language</button>
+
+        </div>
+    </header>
+
+
+
+    <main id="container">
+        <div id="left-panel">
+            <div id="tab-indicator"></div>
+
+            <div id="left-panel">
+
+                <button class="button" onclick="showTab('Management')">
+                    <img src="img/PNG/Management.png" alt="" style="max-width: 15px; max-height: 15px;"> 
+                    <div class="translate" data-en="Management" data-ru="Управление">Management</div>
+                </button>
+
+
+                <button class="button" onclick="showManageButtons()">
+                    <img src="img/PNG/Manage.png" alt="" style="max-width: 15px; max-height: 15px;"> 
+                    <div class="translate" data-en="Manage" data-ru="Управлять">Manage</div>
+                </button>
+                <div class="manage-buttons" id="manageButtonsContainer" style="display: none;">
+                    <button class="tab-button translate" data-en="Dashboards" data-ru="Доска" onclick="showTab('Dashboards')">Dashboards</button>
+                    <button class="tab-button translate" data-en="Environments" data-ru="Среда" onclick="showTab('Environments')">Environments</button>
+                    <button class="tab-button translate" data-en="DataSets" data-ru="Набор данных" onclick="showTab('DataSets')">DataSets</button>
+                    <button class="tab-button translate" data-en="Policies" data-ru="Политика" onclick="showTab('Policies')">Policies</button>
+                    <button class="tab-button translate" data-en="Users" data-ru="Пользователи" onclick="showTab('Users')">Users</button>
+                    <button class="tab-button translate" data-en="VDB Config" data-ru="Конфигурация VDB" onclick="showTab('VDB_Config_Templates')">VDB Config</button>
+                    <button class="tab-button translate" data-en="Hook Templates" data-ru="Установить крючок" onclick="showTab('HookTemplates')">Hook Templates </button>
+                    <button class="tab-button translate" data-en="Plugins" data-ru="Плагины" onclick="showTab('Plugins')">Plugins</button>
+                </div>
+
+
+
+
+                <button class="button" onclick="showResourcesButtons()">
+                    <img src="img/PNG/Resource.png" alt="Resources Icon" style="max-width: 15px; max-height: 15px;"> 
+                    <div class="translate" data-en="Resources" data-ru="Ресурсы">Resources</div>
+                </button>
+
+                <div class="manage-buttons" id="resourcesButtonsContainer" style="display: none;">
+                    <button class="tab-button translate" data-en="Performance Analytics" data-ru="Анализ производительности" onclick="showTab('PerformanceAnalytics')">Performance Analytics</button>
+                    <button class="tab-button translate" data-en="Dataset Performance" data-ru="Производительность набора данных" onclick="showTab('DatasetPerformance')">Dataset Performance</button>
+                    <button class="tab-button translate" data-en="Storage Capacity" data-ru="Емкость накопителя" onclick="showTab('StorageCapacity')">Storage Capacity</button>
+                    <button class="tab-button translate" data-en="Network Performance Tool" data-ru="Инструмент для оценки производительности сети" onclick="showTab('NetworkPerformanceTool')">Network Performance Tool</button>
+                    <button class="tab-button translate" data-en="Managed Source Data" data-ru="Управляемые исходные данные" onclick="showTab('ManagedSourceData')">Managed Source Data</button>
+
+                </div>
+
+
+                <button class="button" onclick="showSystemButtons()">
+                    <img src="img/PNG/Systeam.png" alt="System Icon" style="max-width: 15px; max-height: 15px;"> 
+                    <div class="translate" data-en="System" data-ru="Система">System</div>
+                </button>
+                <div class="manage-buttons" id="systemButtonsContainer" style="display: none;">
+                    <button class="tab-button" id="ReplicationButton" onclick="showTab('Replication', 'ReplicationButton')">Replication</button>
+                    <button class="tab-button" id="FaultsButton" onclick="showTab('Faults', 'FaultsButton')">Faults</button>
+                    <button class="tab-button" id="JobsButton" onclick="showTab('Jobs', 'JobsButton')">Jobs</button>
+                    <button class="tab-button" id="EventsButton" onclick="showTab('Events', 'EventsButton')">Events</button>
+                    <button class="tab-button" id="AuditButton" onclick="showTab('Audit', 'AuditButton')">Audit</button>
+                </div>
+
+
+
+
+                <button class="button" onclick="showTab('Engines')">
+                    <img src="img/PNG/Engines.png" alt="Engines Icon" style="max-width: 15px; max-height: 15px;"> 
+                    <div class="translate" data-en="Engines" data-ru="Железо">Engines</div>
+                    
+                </button>
+
+
+                <button class="button" onclick="showTab('Help')">
+                    <img src="img/PNG/Help.png" alt="Help Icon" style="max-width: 15px; max-height: 15px;"> 
+                    <div class="translate" data-en="Help" data-ru="Помощь">Help</div>
+                </button>
+            </div>
+        </div>
+        <div id="right-panel">
+
+            <div class="tab-content" id="Management">
+                <h2>Management</h2>
+            </div>
+            <div class="tab-content" id="test">
+                <h2>test</h2>
+            </div>
+
+
+
+
+            <!--Manage-->
+            <div class="tab-content" id="Dashboards">
+                <h2>Dashboards</h2>
+            </div>
+
+            <div class="tab-content" id="Environments">
+                <h2>Environments</h2>
+            </div>
+
+            <div class="tab-content" id="DataSets">
+                <h2>DataSets</h2>
+            </div>
+
+            <div class="tab-content" id="Policies">
+                <h2>Policies</h2>
+            </div>
+
+            <div class="tab-content" id="Users">
+                <h1 class="translate" data-en="Users" data-ru="Пользователи" style="color:#d6d6d6">Users</h1>
+                <div class="buttons">
+                    <div class="filters">
+                        <button class="filters-button">Filters</button>
+                    </div>
+                    <button class="button white-button">Add</button>
+                    <button class="button white-button">Edit</button>
+                    <button class="button white-button">Delete</button>
+                </div>
+                <div class="table-container">
+                    <table class="user-table">
+                        <!-- После нужно подключать бд или придумать как сохранять -->
+                        <thead>
+                            <tr>
+                                <th class="translate" data-en="Username" data-ru="Имя пользователя">Username</th>
+                                <th class="translate" data-en="Email" data-ru="Email">Email</th>
+                                <th class="translate" data-en="Type" data-ru="Тип">Type</th>
+                                <th class="translate" data-en="First Name" data-ru="Имя">First Name</th>
+                                <th class="translate" data-en="Last Name" data-ru="Фамилия">Last Name</th>
+                                <th class="translate" data-en="Work Phone Number" data-ru="Рабочий номер телефона">Work Phone Number</th>
+                                <th class="translate" data-en="Home Phone Number" data-ru="Домашний номер телефона">Home Phone Number</th>
+                            </tr>
+                        </thead>
+                        <div style="background-color:#6e6e6e; max-width: 100px;"></div>
+
+
+                        <tbody>
+                            <tr>
+                                <td>user1</td>
+                                <td>user1@example.com</td>
+                                <td>Type1</td>
+                                <td>John</td>
+                                <td>Doe</td>
+                                <td>123-456-7890</td>
+                                <td>987-654-3210</td>
+                            </tr>
+                            <tr>
+                                <td>user2</td>
+                                <td>user2@example.com</td>
+                                <td>Type2</td>
+                                <td>Jane</td>
+                                <td>Smith</td>
+                                <td>555-555-5555</td>
+                                <td>111-111-1111</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="tab-content" id="VDB_Config_Templates">
+                <h2>VDB Config Templates</h2>
+            </div>
+
+            <div class="tab-content" id="HookTemplates">
+                <h2>Hook Templates</h2>
+            </div>
+
+            <div class="tab-content" id="Plugins">
+                <h2>Plugins</h2>
+            </div>
+
+
+
+            <div class="tab-content" id="Resources">
+                <h2>Resources</h2>
+            </div>
+            <div class="tab-content" id="System">
+                <h2>System</h2>
+            </div>
+            <div class="tab-content" id="Engines">
+                <h2>Engines</h2>
+            </div>
+            <div class="tab-content" id="Help">
+                <h2>Help</h2>
+            </div>
+
+
+
+            <div class="tab-content" id="PerformanceAnalytics">
+                <h2>Performance Analytics</h2>
+            </div>
+
+            <div class="tab-content" id="DatasetPerformance">
+                <h2>Dataset Performance</h2>
+            </div>
+
+            <div class="tab-content" id="StorageCapacity">
+                <h2>Storage Capacity</h2>
+            </div>
+
+            <div class="tab-content" id="NetworkPerformanceTool">
+                <h2>Network Performance Tool</h2>
+            </div>
+
+            <div class="tab-content" id="ManagedSourceData">
+                <h2>Managed Source Data</h2>
+            </div>
+
+
+
+            <div class="tab-content" id="Replication">
+                <h2>content</h2>
+            </div>
+
+            <div class="tab-content" id="Faults">
+                <h2>5231t3q623623636</h2>
+            </div>
+
+            <div class="tab-content" id="Jobs">
+                <h2>5724723472347247</h2>
+            </div>
+
+            <div class="tab-content" id="Events">
+                <h2>432</h2>
+
+            </div>
+
+            <div class="tab-content" id="Audit">
+                <h2>232416123623</h2>
+            </div>
+
+
+        </div>
+    </main>
+
+
+    <!-- Переключение темы (надо допилить) -->
+
+    <!-- <div id="theme-toggle">
+        <label class="switch">
+        <input type="checkbox" id="theme-toggle-input">
+                
+        <span class="slider round"></span>
+            </label>
+        <span class="theme-label">Light Theme</span>
+        <span class="theme-label">Dark Theme</span>
+    </div> -->
+
+
+
+
+    <footer>
+
+    </footer>
+
+
+
+    <script src="scripts/script.js"></script>
+    <script src="scripts/language.js"></script>
+</body>
+
+</html>
